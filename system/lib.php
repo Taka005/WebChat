@@ -61,17 +61,22 @@ function getServers(){
  * @return Object サーバー情報
  */
 function getServer($id){
-	return json_decode(file_get_contents("../data/server/".$id."/setting.json"),true);
+	$server = file_get_contents("../data/server/".$id."/setting.json");
+	if(!$server) return false;
+	return json_decode($server,true);
 }
 
 /**
  * @param String $user ユーザーID
+ * @param String $name サーバー名
  */
-function createServer($user){
+function createServer($user,$name){
 	$id = createId(12);
 	mkdir("../data/".$id);
 
 	file_put_contents("../data/server/".$id."/setting.json",json_encode(array(
+		"id" => $id,
+		"name" => $name,
 		"owner" => $user,
         "time" => time()
 	),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
@@ -106,7 +111,9 @@ function deleteServer($user,$id){
  * @return Array メッセージ配列
  */
 function getMessages($id){
-	return json_decode(file_get_contents("../data/server/".$id."/message.json"),true);
+	$message = file_get_contents("../data/server/".$id."/message.json")
+	if(!$message) return false;
+	return json_decode($message,true);
 }
 
 /**

@@ -1,9 +1,18 @@
 <?php
 require_once __DIR__."/system/discord.php";
+require_once __DIR__."/system/lib.php";
 require_once __DIR__."/config.php";
 
 if(!isset($_SESSION["user"])){
     header("Location: ".url($client_id,$redirect_url,$scopes));
+}
+
+$server = getServer($_GET["server"]);
+if($server){
+    $messages = getMessages($server["id"]);
+    if($_POST["message"]){
+        createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["message"]));
+    }
 }
 
 ?>
@@ -47,28 +56,41 @@ if(!isset($_SESSION["user"])){
                         </ul>   
                     </div>
                     <form class="d-flex">
-                        <?php if(!isset($_SESSION["user"])){ ?>
-                            <a class="btn btn-outline-success" href="<?= url($client_id,$redirect_url,$scopes) ?>" role="button">ログイン</a>
-                        <?php }else{ ?>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?= $_SESSION["username"]."#".$_SESSION["discrim"] ?>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="./account">アカウント</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="./system/logout">ログアウト</a></li>
-                                    <li><a class="dropdown-item text-primary" href="<?= url($client_id,$redirect_url,$scopes) ?>">データ同期</a></li>
-                                </ul>
-                            </div>
-                        <?php } ?>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= $_SESSION["username"] ?>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="./account">アカウント</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="./system/logout">ログアウト</a></li>
+                                <li><a class="dropdown-item text-primary" href="<?= url($client_id,$redirect_url,$scopes) ?>">データ同期</a></li>
+                            </ul>
+                        </div>
                     </form>
                 </div>
             </nav>
         </header>
 	    <main>
             <div class="container">
-          
+                <?php if($server){ ?>
+                    <div data-bs-spy="scroll" class="scrollspy-example" tabindex="0">
+                        <?php foreach($messages as $message){ ?>
+                            <h5><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h5>
+                            <p><?= $message["text"] ?></p>
+                        <?php } ?>
+                        <form class="row g-3" action="./app" method="post">
+                            <div class="col-auto">
+                                <input name="message" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" require_onced>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3">送信</button>
+                            </div>
+                        </form>
+                    </div>
+                <?php }else{ ?>
+                    TEST
+                <?php } ?>
             </div>
 	    </main>
         <script src="./assets/js/index.js"></script>

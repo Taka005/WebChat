@@ -47,7 +47,7 @@ require_once __DIR__."/config.php";
                         <?php }else{ ?>
                             <div class="dropdown">
                                 <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?= $_SESSION["username"]."#".$_SESSION["discrim"] ?>
+                                    <?= $_SESSION["username"] ?>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li><a class="dropdown-item" href="./account">アカウント</a></li>
@@ -63,7 +63,9 @@ require_once __DIR__."/config.php";
         </header>
 	    <main>
             <div class="container">
-          
+                <div class="position-absolute top-50 start-50 translate-middle">
+                    <a class="btn btn-primary btn-lg" href="./app" role="button">会話を始める</a>
+                </dev>
             </div>
 	    </main>
         <script src="./assets/js/index.js"></script>
