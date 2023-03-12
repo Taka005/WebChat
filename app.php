@@ -9,10 +9,10 @@ if(!isset($_SESSION["user"])){
 
 $server = getServer($_GET["server"]);
 if($server){
-    $messages = getMessages($server["id"]);
     if($_POST["message"]){
         createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["message"]));
     }
+    $messages = getMessages($server["id"]);
 }
 
 ?>
@@ -89,7 +89,17 @@ if($server){
                         </form>
                     </div>
                 <?php }else{ ?>
-                    TEST
+                    <?php 
+                        foreach(getServers() as $server){ 
+                            $server = getServer($server);
+                    ?>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <?= $server["name"] ?>
+                                <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
+                            </li>
+                        </ul>
+                    <?php } ?>
                 <?php } ?>
             </div>
 	    </main>
