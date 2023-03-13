@@ -11,15 +11,13 @@ if(isset($_POST["createServer"])){
     createServer($_SESSION["id"],htmlspecialchars($_POST["createServer"]));
 }
 
-$server = $_GET["server"];
-if($server){
-    $server = getServer(preg_replace("/[^0-9]/","",$_GET["server"]));
-    if(!empty($server)){
-        if(isset($_POST["createMessage"])){
-            createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["message"]));
-        }
-        $messages = getMessages($server["id"]);
+$server = preg_replace("/[^0-9]/","",$_GET["server"]);
+if(!empty($server)){
+    $server = getServer($server);
+    if(isset($_POST["createMessage"])){
+        createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["createMessage"]));
     }
+    $messages = getMessages($server["id"]);
 }
 ?>
 <!DOCTYPE html>
@@ -79,42 +77,44 @@ if($server){
         </header>
 	    <main>
             <div class="container">
-                <?php if($server){ ?>
-                    <div data-bs-spy="scroll" class="scrollspy-example" tabindex="0">
-                        <?php foreach($messages as $message){ ?>
-                            <h5><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h5>
-                            <p><?= $message["text"] ?></p>
-                        <?php } ?>
+                <div class="position-absolute top-50 start-50 translate-middle">
+                    <?php if($server){ ?>
+                        <div data-bs-spy="scroll" class="scrollspy-example" tabindex="0">
+                            <?php foreach($messages as $message){ ?>
+                                <h5><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h5>
+                                <p><?= $message["text"] ?></p>
+                            <?php } ?>
+                            <form id="sendForm" class="row g-3" action="./" method="post">
+                                <div class="col-auto">
+                                    <input id="sendInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
+                                </div>
+                                <div class="col-auto">
+                                    <button id="sendButton" type="submit" class="btn btn-primary mb-3">送信</button>
+                                </div>
+                            </form>
+                        </div>
+                    <?php }else{ ?>
+                        <ul class="list-group">
+                            <?php 
+                                foreach(getServers() as $server){ 
+                                    $server = getServer($server);
+                            ?>  
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="./app/<?= $server["id"] ?>"><?= $server["name"] ?></a>
+                                    <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
+                                </li>
+                            <?php } ?>
+                        </ul>
                         <form id="sendForm" class="row g-3" action="./" method="post">
                             <div class="col-auto">
-                                <input id="sendInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
+                                <input id="sendInput" name="createServer" type="text" class="form-control" placeholder="サーバー名" autocomplete="off" require_onced>
                             </div>
                             <div class="col-auto">
-                                <button id="sendButton" type="submit" class="btn btn-primary mb-3">送信</button>
+                                <button id="sendButton" type="submit" class="btn btn-primary mb-3">作成</button>
                             </div>
                         </form>
-                    </div>
-                <?php }else{ ?>
-                    <ul class="list-group">
-                        <?php 
-                            foreach(getServers() as $server){ 
-                                $server = getServer($server);
-                        ?>  
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="./app/<?= $server["id"] ?>"><?= $server["name"] ?></a>
-                                <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
-                            </li>
-                        <?php } ?>
-                    </ul>
-                    <form id="sendForm" class="row g-3" action="./" method="post">
-                        <div class="col-auto">
-                            <input id="sendInput" name="createServer" type="text" class="form-control" placeholder="サーバー名" autocomplete="off" require_onced>
-                        </div>
-                        <div class="col-auto">
-                            <button id="sendButton" type="submit" class="btn btn-primary mb-3">作成</button>
-                        </div>
-                    </form>
-                <?php } ?>
+                    <?php } ?>
+                </dev>
             </div>
 	    </main>
         <script src="../assets/js/check.js"></script>
