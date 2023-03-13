@@ -84,7 +84,7 @@ if(!empty($server)){
                                 <h5><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h5>
                                 <p><?= $message["text"] ?></p>
                             <?php } ?>
-                            <form id="sendForm" class="row g-3" action="./" method="post">
+                            <form id="sendForm" class="row g-3" action="./app" method="post">
                                 <div class="col-auto">
                                     <input id="sendInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
                                 </div>
@@ -105,7 +105,7 @@ if(!empty($server)){
                                 </li>
                             <?php } ?>
                         </ul>
-                        <form id="sendForm" class="row g-3" action="./" method="post">
+                        <form id="sendForm" class="row g-3" action="./app" method="post">
                             <div class="col-auto">
                                 <input id="sendInput" name="createServer" type="text" class="form-control" placeholder="サーバー名" autocomplete="off" require_onced>
                             </div>
