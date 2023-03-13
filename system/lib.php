@@ -20,7 +20,7 @@ function createId($n){
  * @return Array ユーザー配列
  */
 function getUsers(){
-	return glob("../data/server/*.json");
+	return glob("./data/server/*.json");
 }
 
 /**
@@ -28,7 +28,7 @@ function getUsers(){
  * @return Object ユーザーデータ
  */
 function getUser($id){
-	$user = file_get_contents("../data/user/".$id.".json");
+	$user = file_get_contents("./data/user/".$id.".json");
 	if(!$user) return false;
 	return json_decode($user,true);
 }
@@ -37,7 +37,7 @@ function getUser($id){
  * @param Object $user ユーザーデータ
  */
 function createUser($user){
-	file_put_contents("../data/user/".$user["id"].".json",json_encode(array(
+	file_put_contents("./data/user/".$user["id"].".json",json_encode(array(
 		"id" => $user["id"],
 		"name" => $user["username"],
 		"discriminator" => $user["discriminator"],
@@ -53,7 +53,7 @@ function createUser($user){
  * @return Array サーバーID一覧
  */
 function getServers(){
-	return glob("../data/server/*",GLOB_ONLYDIR);
+	return glob("./data/server/*",GLOB_ONLYDIR);
 }
 
 /**
@@ -61,7 +61,7 @@ function getServers(){
  * @return Object サーバー情報
  */
 function getServer($id){
-	$server = file_get_contents("../data/server/".$id."/setting.json");
+	$server = file_get_contents("./data/server/".$id."/setting.json");
 	if(!$server) return false;
 	return json_decode($server,true);
 }
@@ -72,18 +72,18 @@ function getServer($id){
  */
 function createServer($user,$name){
 	$id = createId(12);
-	mkdir("../data/server/".$id,0777,true);
+	mkdir("./data/server/".$id);
 
-	file_put_contents("../data/server/".$id."/setting.json",json_encode(array(
+	file_put_contents("./data/server/".$id."/setting.json",json_encode(array(
 		"id" => $id,
 		"name" => $name,
 		"owner" => $user,
         "time" => time()
 	),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
 	
-	file_put_contents("../data/server/".$id."/message.json",json_encode(array(),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
+	file_put_contents("./data/server/".$id."/message.json",json_encode(array(),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
 
-	header("Location: ../app/".$id);
+	header("Location: ./app/".$id);
 }
 
 /**
@@ -95,10 +95,10 @@ function deleteServer($user,$id){
 	$setting = getServer($id);
 
 	if($setting["owner"] == $user){
-		unlink("../data/server/".$id."/setting.json");
-		unlink("../data/server/".$id."/message.json");
+		unlink("./data/server/".$id."/setting.json");
+		unlink("./data/server/".$id."/message.json");
 
-		return rmdir("../data/server/".$id);
+		return rmdir("./data/server/".$id);
 	}else{
 		return false;
 	}
@@ -111,7 +111,7 @@ function deleteServer($user,$id){
  * @return Array メッセージ配列
  */
 function getMessages($id){
-	$message = file_get_contents("../data/server/".$id."/message.json");
+	$message = file_get_contents("./data/server/".$id."/message.json");
 	if(!$message) return false;
 	return json_decode($message,true);
 }
@@ -141,7 +141,7 @@ function createMessage($user,$server,$text){
 		"time" => time()
 	));
 
-	file_put_contents("../data/server/".$server."/message.json",$message,JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR);
+	file_put_contents("./data/server/".$server."/message.json",$message,JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR);
 }
 
 /**

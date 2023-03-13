@@ -7,21 +7,20 @@ if(!isset($_SESSION["user"])){
     header("Location: ".url($client_id,$redirect_url,$scopes));
 }
 
-if($_POST["createServer"]){
+if(isset($_POST["createServer"])){
     createServer($_SESSION["id"],htmlspecialchars($_POST["createServer"]));
 }
 
 $server = $_GET["server"];
 if($server){
     $server = getServer(preg_replace("/[^0-9]/","",$_GET["server"]));
-    if($server){
-        if($_POST["createMessage"]){
+    if(!empty($server)){
+        if(isset($_POST["createMessage"])){
             createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["message"]));
         }
         $messages = getMessages($server["id"]);
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -31,25 +30,25 @@ if($server){
 
         <title>WebChat</title>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon-16x16.png">
-        <link rel="manifest" href="./assets/img/site.webmanifest">
-        <link rel="mask-icon" href="./assets/img/safari-pinned-tab.svg" color="#5bbad5">
-        <link rel="shortcut icon" href="./assets/img/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon-16x16.png">
+        <link rel="manifest" href="../assets/img/site.webmanifest">
+        <link rel="mask-icon" href="../assets/img/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="../assets/img/favicon.ico">
         <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="msapplication-config" content="./assets/img/browserconfig.xml">
+        <meta name="msapplication-config" content="../assets/img/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="./assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
     </head>
     <body>
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-darl" href="./">
-                        <img src="./assets/img/icon.png" alt="アイコン" width="30" height="30" class="d-inline-block align-text-top">
+                    <a class="navbar-brand text-darl" href="../">
+                        <img src="../assets/img/icon.png" alt="アイコン" width="30" height="30" class="d-inline-block align-text-top">
                         WebChat
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false">
@@ -68,7 +67,7 @@ if($server){
                                 <?= $_SESSION["username"] ?>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="./account">アカウント</a></li>
+                                <li><a class="dropdown-item" href="../account">アカウント</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="./system/logout">ログアウト</a></li>
                                 <li><a class="dropdown-item text-primary" href="<?= url($client_id,$redirect_url,$scopes) ?>">データ同期</a></li>
@@ -86,7 +85,7 @@ if($server){
                             <h5><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h5>
                             <p><?= $message["text"] ?></p>
                         <?php } ?>
-                        <form id="sendForm" class="row g-3" action="./app" method="post">
+                        <form id="sendForm" class="row g-3" action="./" method="post">
                             <div class="col-auto">
                                 <input id="sendInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
                             </div>
@@ -107,7 +106,7 @@ if($server){
                             </li>
                         <?php } ?>
                     </ul>
-                    <form id="sendForm" class="row g-3" action="./app" method="post">
+                    <form id="sendForm" class="row g-3" action="./" method="post">
                         <div class="col-auto">
                             <input id="sendInput" name="createServer" type="text" class="form-control" placeholder="サーバー名" autocomplete="off" require_onced>
                         </div>
@@ -118,7 +117,7 @@ if($server){
                 <?php } ?>
             </div>
 	    </main>
-        <script src="./assets/js/check.js"></script>
+        <script src="../assets/js/check.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
