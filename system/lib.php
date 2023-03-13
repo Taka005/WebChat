@@ -41,7 +41,7 @@ function createUser($user){
 		"id" => $user["id"],
 		"name" => $user["username"],
 		"discriminator" => $user["discriminator"],
-		"avatar" => "https://cdn.discord.com/avatar/".$user["id"]."/".$user["avatar"].is_animated($user["avatar"])."?size=1024",
+		"avatar" => "https://cdn.discordapp.com/avatars/".$user["id"]."/".$user["avatar"].is_animated($user["avatar"])."?size=1024",
 		"color" => $user["accent_color"],
 		"time" => time()
 	),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
@@ -72,7 +72,7 @@ function getServer($id){
  */
 function createServer($user,$name){
 	$id = createId(12);
-	mkdir("../data/".$id);
+	mkdir("../data/server/".$id);
 
 	file_put_contents("../data/server/".$id."/setting.json",json_encode(array(
 		"id" => $id,
@@ -81,7 +81,7 @@ function createServer($user,$name){
         "time" => time()
 	),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
 	
-	file_put_contents("../data/server/".$id."/message.json","[]");
+	file_put_contents("../data/server/".$id."/message.json",json_encode(array(),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
 
 	header("Location: ../app/".$id);
 }
