@@ -89,17 +89,17 @@ if($server){
                         </form>
                     </div>
                 <?php }else{ ?>
-                    <?php 
-                        foreach(getServers() as $server){ 
-                            $server = getServer($server);
-                    ?>
-                        <ul class="list-group">
+                    <ul class="list-group">
+                        <?php 
+                            foreach(getServers() as $server){ 
+                                $server = getServer($server);
+                        ?>  
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <?= $server["name"] ?>
                                 <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
                             </li>
-                        </ul>
-                    <?php } ?>
+                        <?php } ?>
+                    </ul>
                 <?php } ?>
             </div>
 	    </main>
