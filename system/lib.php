@@ -72,7 +72,7 @@ function getServer($id){
  */
 function createServer($user,$name){
 	$id = createId(12);
-	mkdir("../data/server/".$id);
+	mkdir("../data/server/".$id,0777,true);
 
 	file_put_contents("../data/server/".$id."/setting.json",json_encode(array(
 		"id" => $id,

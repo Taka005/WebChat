@@ -11,8 +11,9 @@ if($_POST["createServer"]){
     createServer($_SESSION["id"],htmlspecialchars($_POST["createServer"]));
 }
 
-if($_GET["server"]){
-    $server = getServer(preg_replace('/[^0-9]/',"",$_GET["server"]));
+$server = $_GET["server"];
+if($server){
+    $server = getServer(preg_replace("/[^0-9]/","",$_GET["server"]));
     if($server){
         if($_POST["createMessage"]){
             createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["message"]));
@@ -90,7 +91,7 @@ if($_GET["server"]){
                                 <input id="sendInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
                             </div>
                             <div class="col-auto">
-                                <button id="sendButton" type="submit" class="btn btn-primary mb-3" disabled="true">送信</button>
+                                <button id="sendButton" type="submit" class="btn btn-primary mb-3">送信</button>
                             </div>
                         </form>
                     </div>
@@ -108,16 +109,16 @@ if($_GET["server"]){
                     </ul>
                     <form id="sendForm" class="row g-3" action="./app" method="post">
                         <div class="col-auto">
-                            <input id="sendInput" name="createServer" type="text" class="form-control" placeholder="サーバー名" autocomplete="off" required>
+                            <input id="sendInput" name="createServer" type="text" class="form-control" placeholder="サーバー名" autocomplete="off" require_onced>
                         </div>
                         <div class="col-auto">
-                            <button id="sendButton" type="submit" class="btn btn-primary mb-3" disabled>作成</button>
+                            <button id="sendButton" type="submit" class="btn btn-primary mb-3">作成</button>
                         </div>
                     </form>
                 <?php } ?>
             </div>
 	    </main>
-        <script src="./assets/js/index.js"></script>
+        <script src="./assets/js/check.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
