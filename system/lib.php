@@ -39,7 +39,7 @@ function getUser($id){
 function createUser($user){
 	file_put_contents("../data/user/".$user["id"].".json",json_encode(array(
 		"id" => $user["id"],
-		"name" = > $user["username"],
+		"name" => $user["username"],
 		"discriminator" => $user["discriminator"],
 		"avatar" => "https://cdn.discord.com/avatar/".$user["id"]."/".$user["avatar"].is_animated($user["avatar"])."?size=1024",
 		"color" => $user["accent_color"],
@@ -111,7 +111,7 @@ function deleteServer($user,$id){
  * @return Array メッセージ配列
  */
 function getMessages($id){
-	$message = file_get_contents("../data/server/".$id."/message.json")
+	$message = file_get_contents("../data/server/".$id."/message.json");
 	if(!$message) return false;
 	return json_decode($message,true);
 }
