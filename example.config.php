@@ -1,9 +1,11 @@
 <?php
-$client_id = "";
+    $client_id = "";
 
-$secret_id = "";
+    $secret_id = "";
 
-$scopes = "identify";
+    $scopes = "identify";
 
-$redirect_url = "";
+    $redirect_url = "";
+
+    $admin = array();
 ?>

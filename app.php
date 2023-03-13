@@ -14,10 +14,12 @@ if(isset($_POST["createServer"])){
 $server = preg_replace("/[^0-9]/","",$_GET["server"]);
 if(!empty($server)){
     $server = getServer($server);
-    if(isset($_POST["createMessage"])){
-        createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["createMessage"]));
+    if($server){
+        if(isset($_POST["createMessage"])){
+            createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["createMessage"]));
+        }
+        $messages = getMessages($server["id"]);
     }
-    $messages = getMessages($server["id"]);
 }
 ?>
 <!DOCTYPE html>
