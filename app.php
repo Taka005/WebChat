@@ -79,12 +79,12 @@ if($server){
                             <h5><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h5>
                             <p><?= $message["text"] ?></p>
                         <?php } ?>
-                        <form class="row g-3" action="./app" method="post">
+                        <form id="sendForm" class="row g-3" action="./app" method="post">
                             <div class="col-auto">
-                                <input name="message" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" require_onced>
+                                <input id="sendInput" name="message" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-3">送信</button>
+                                <button id="sendButton" type="submit" class="btn btn-primary mb-3" disabled>送信</button>
                             </div>
                         </form>
                     </div>
@@ -95,7 +95,7 @@ if($server){
                                 $server = getServer($server);
                         ?>  
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <?= $server["name"] ?>
+                            <a href="./app/<?= $server["id"] ?>"><?= $server["name"] ?></a>
                                 <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
                             </li>
                         <?php } ?>
