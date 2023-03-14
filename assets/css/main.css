@@ -11,3 +11,8 @@
 .contents_box::-webkit-scrollbar {
     display: none;
 }
+
+#messageForm {
+    width: fit-content;
+    margin: auto;
+}

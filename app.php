@@ -3,6 +3,8 @@ require_once __DIR__."/system/discord.php";
 require_once __DIR__."/system/lib.php";
 require_once __DIR__."/config.php";
 
+date_default_timezone_set("Asia/Tokyo");
+
 if(!isset($_SESSION["user"])){
     header("Location: ".url($client_id,$redirect_url,$scopes));
 }
@@ -81,7 +83,7 @@ if(!empty($server)){
                     <?php if(!empty($server)){ ?>
                         <div class="scrollMessage">
                             <?php foreach($messages as $message){ ?>
-                                <h6><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
+                                <h6><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
                                 <p><?= $message["text"] ?></p>
                             <?php } ?>
                         </div>
