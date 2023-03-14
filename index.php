@@ -20,6 +20,14 @@
         <meta name="msapplication-config" content="./assets/img/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
 
+        <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/ fb# prefix属性: https://ogp.me/ns/ prefix属性#">
+        <meta property="og:url" content="https://chat.takadev.tk/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="トップページ" />
+        <meta property="og:description" content="Web上で使えるオープンチャットツール" />
+        <meta property="og:site_name" content="WebChat" />
+        <meta property="og:image" content="https://chat.takadev.tk/assets/img/icon.png" />
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="./assets/css/main.css">
     </head>
