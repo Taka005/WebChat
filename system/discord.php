@@ -40,14 +40,14 @@ function get_user(){
     $res = json_decode(curl_exec($curl),true);
     curl_close($curl);
 
-    $_SESSION["user"] = $res;
-    $_SESSION["username"] = $res["username"];
-    $_SESSION["discriminator"] = $res["discriminator"];
-    $_SESSION["id"] = $res["id"];
-    $_SESSION["avatar"] = "https://cdn.discordapp.com/avatars/".$res["id"]."/".$res["avatar"].is_animated($res["avatar"])."?size=1024";
-    if($res["accent_color"]) $_SESSION["accent_color"] = $res["accent_color"];
+    if(!empty($res)){
+        $_SESSION["user"] = $res;
+        $_SESSION["username"] = $res["username"];
+        $_SESSION["discriminator"] = $res["discriminator"];
+        $_SESSION["id"] = $res["id"];
+        $_SESSION["avatar"] = "https://cdn.discordapp.com/avatars/".$res["id"]."/".$res["avatar"].is_animated($res["avatar"])."?size=1024";
+        if($res["accent_color"]) $_SESSION["accent_color"] = $res["accent_color"];    
 
-    if(!empty($res["id"])){
         createUser($res);
     }
 }
