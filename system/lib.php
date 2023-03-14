@@ -9,7 +9,7 @@ function is_animated($image){
 }
 
 function createId($n){
-    $random = substr(str_shuffle("0123456789"),0,$n);
+    $random = substr(str_shuffle("01234567890123456789"),0,$n);
     return $random;
 }
 
@@ -92,7 +92,7 @@ function createServer($user,$name){
  * @return Boolean 成功か失敗か
  */
 function deleteServer($user,$id){
-	$setting = getServer($id);
+	$setting = json_decode(file_get_contents("./data/server/".$id."/setting.json"),true);
 
 	if($setting["owner"] == $user){
 		unlink("./data/server/".$id."/setting.json");
@@ -122,7 +122,7 @@ function getMessages($id){
  * @return Object メッセージデータ
  */
 function getMessage($server,$id){
-	$message = getMessages($server);
+	$message = json_decode(file_get_contents("./data/server/".$id."/message.json"),true);
 	return array_search($id,array_column($message,"id"));
 }
 
@@ -132,7 +132,8 @@ function getMessage($server,$id){
  * @param String $text メッセージ
  */
 function createMessage($user,$server,$text){
-	$message = getMessages($server);
+	$message = json_decode(file_get_contents("./data/server/".$server."/message.json"),true);
+
 	array_push($message,array(
 		"id" => createId(12),
 		"user" => $user,
@@ -142,6 +143,8 @@ function createMessage($user,$server,$text){
 	));
 
 	file_put_contents("./data/server/".$server."/message.json",$message,JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR);
+
+	header("Location: ./app/".$server);
 }
 
 /**
@@ -151,8 +154,8 @@ function createMessage($user,$server,$text){
  * @return Boolean 成功か失敗か
  */
 function deleteMessage($user,$server,$id){
-	$messages = getMessages($server);
-	$message = getMessage($server,$id);
+	$messages = json_decode(file_get_contents("./data/server/".$server."/message.json"),true);
+	$message = array_search($id,array_column(json_decode(file_get_contents("./data/server/".$server."/message.json"),true),"id"));
 
 	if($message["user"] == $user){
 		return array_splice($messages,$message);

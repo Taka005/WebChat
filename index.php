@@ -31,16 +31,6 @@
                         <img src="./assets/img/icon.png" alt="アイコン" width="30" height="30" class="d-inline-block align-text-top">
                         WebChat
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="https://discord.taka.ml" target="_blank">サポートサーバー</a>
-                            </li>
-                        </ul>   
-                    </div>
                     <form class="d-flex">
                         <?php if(!isset($_SESSION["user"])){ ?>
                             <a class="btn btn-outline-success" href="<?= url($client_id,$redirect_url,$scopes) ?>" role="button">ログイン</a>

@@ -51,16 +51,6 @@ if(!empty($server)){
                         <img src="../assets/img/icon.png" alt="アイコン" width="30" height="30" class="d-inline-block align-text-top">
                         WebChat
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="https://discord.taka.ml" target="_blank">サポートサーバー</a>
-                            </li>
-                        </ul>   
-                    </div>
                     <form class="d-flex">
                         <div class="dropdown">
                             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,13 +70,13 @@ if(!empty($server)){
 	    <main>
             <div class="container">
                 <div class="position-absolute top-50 start-50 translate-middle">
-                    <?php if($server){ ?>
+                    <?php if(!empty($server)){ ?>
                         <div data-bs-spy="scroll" class="scrollspy-example" tabindex="0">
                             <?php foreach($messages as $message){ ?>
                                 <h5><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h5>
                                 <p><?= $message["text"] ?></p>
                             <?php } ?>
-                            <form id="sendForm" class="row g-3" action="./app" method="post">
+                            <form id="sendForm" class="row g-3" action="./app/<?= $server["id"] ?>" method="post">
                                 <div class="col-auto">
                                     <input id="sendInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
                                 </div>
@@ -99,7 +89,7 @@ if(!empty($server)){
                         <ul class="list-group">
                             <?php 
                                 foreach(getServers() as $server){ 
-                                    $server = getServer($server);
+                                    $server = getServer(basename($server));
                             ?>  
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <a href="./app/<?= $server["id"] ?>"><?= $server["name"] ?></a>
