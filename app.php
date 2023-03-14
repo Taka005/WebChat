@@ -81,7 +81,7 @@ if(!empty($server)){
                                     <input id="sendInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
                                 </div>
                                 <div class="col-auto">
-                                    <button id="sendButton" type="submit" class="btn btn-primary mb-3">送信</button>
+                                    <button id="sendButton" type="submit" class="btn btn-secondary mb-3">送信</button>
                                 </div>
                             </form>
                         </div>
@@ -102,7 +102,7 @@ if(!empty($server)){
                                 <input id="sendInput" name="createServer" type="text" class="form-control" placeholder="サーバー名" autocomplete="off" require_onced>
                             </div>
                             <div class="col-auto">
-                                <button id="sendButton" type="submit" class="btn btn-primary mb-3">作成</button>
+                                <button id="sendButton" type="submit" class="btn btn-secondary mb-3">作成</button>
                             </div>
                         </form>
                     <?php } ?>
