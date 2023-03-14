@@ -1,1 +1,1 @@
-console.log("Welcome WebChat!");
+console.log("WebChatへようこそ!");

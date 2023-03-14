@@ -44,7 +44,7 @@ function createUser($user){
 		"avatar" => "https://cdn.discordapp.com/avatars/".$user["id"]."/".$user["avatar"].is_animated($user["avatar"])."?size=1024",
 		"color" => $user["accent_color"],
 		"time" => time()
-	),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
+	),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR));
 }
 
 //サーバー
@@ -81,9 +81,9 @@ function createServer($user,$name){
         "time" => time()
 	),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
 	
-	file_put_contents("./data/server/".$id."/message.json",json_encode(array(),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
+	file_put_contents("./data/server/".$id."/message.json",json_encode(array(),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR));
 
-	header("Location: ./app/".$id);
+	header("Location: ./app?server=".$id);
 }
 
 /**
@@ -98,7 +98,7 @@ function deleteServer($user,$id){
 		unlink("./data/server/".$id."/setting.json");
 		unlink("./data/server/".$id."/message.json");
 
-		return rmdir("./data/server/".$id);
+		return rmdir("./data?server=".$id);
 	}else{
 		return false;
 	}
@@ -141,10 +141,10 @@ function createMessage($user,$server,$text){
 		"text" => $text,
 		"time" => time()
 	));
+	
+	file_put_contents("./data/server/".$server."/message.json",json_encode($message,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR));
 
-	file_put_contents("./data/server/".$server."/message.json",json_encode($message,JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
-
-	header("Location: ./app/".$server);
+	header("Location: ./app?server=".$server);
 }
 
 /**

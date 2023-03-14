@@ -30,25 +30,25 @@ if(!empty($server)){
 
         <title>WebChat</title>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon-16x16.png">
-        <link rel="manifest" href="../assets/img/site.webmanifest">
-        <link rel="mask-icon" href="../assets/img/safari-pinned-tab.svg" color="#5bbad5">
-        <link rel="shortcut icon" href="../assets/img/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon-16x16.png">
+        <link rel="manifest" href="./assets/img/site.webmanifest">
+        <link rel="mask-icon" href="./assets/img/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="./assets/img/favicon.ico">
         <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="msapplication-config" content="../assets/img/browserconfig.xml">
+        <meta name="msapplication-config" content="./assets/img/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="./assets/css/main.css">
     </head>
     <body>
         <header>
             <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-darl" href="../">
-                        <img src="../assets/img/icon.png" alt="アイコン" width="30" height="30" class="d-inline-block align-text-top">
+                    <a class="navbar-brand text-darl" href="./">
+                        <img src="./assets/img/icon.png" alt="アイコン" width="30" height="30" class="d-inline-block align-text-top">
                         WebChat
                     </a>
                     <form class="d-flex">
@@ -57,7 +57,7 @@ if(!empty($server)){
                                 <?= $_SESSION["username"] ?>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="../account">アカウント</a></li>
+                                <li><a class="dropdown-item" href="./account">アカウント</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="./system/logout">ログアウト</a></li>
                                 <li><a class="dropdown-item text-primary" href="<?= url($client_id,$redirect_url,$scopes) ?>">データ同期</a></li>
@@ -73,15 +73,12 @@ if(!empty($server)){
                     <?php if(!empty($server)){ ?>
                         <div data-bs-spy="scroll" class="scrollspy-example" tabindex="0">
                             <?php foreach($messages as $message){ ?>
-                                <h5><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h5>
+                                <h6><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
                                 <p><?= $message["text"] ?></p>
                             <?php } ?>
-                            <form id="sendForm" class="row g-3" action="./app" method="post">
+                            <form id="messageForm" class="row g-3" action="./app?server=<?= $server["id"] ?>" method="post">
                                 <div class="col-auto">
-                                    <input id="sendInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" required>
-                                </div>
-                                <div class="col-auto">
-                                    <button id="sendButton" type="submit" class="btn btn-secondary mb-3">送信</button>
+                                    <input id="messageInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off" require_onced>
                                 </div>
                             </form>
                         </div>
@@ -92,24 +89,22 @@ if(!empty($server)){
                                     $server = getServer(basename($server));
                             ?>  
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="./app/<?= $server["id"] ?>"><?= $server["name"] ?></a>
+                                <a href="./app?server=<?= $server["id"] ?>"><?= $server["name"] ?></a>
                                     <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
                                 </li>
                             <?php } ?>
                         </ul>
-                        <form id="sendForm" class="row g-3" action="./app" method="post">
+                        <form id="serverForm" class="row g-3" action="./app" method="post">
                             <div class="col-auto">
-                                <input id="sendInput" name="createServer" type="text" class="form-control" placeholder="サーバー名" autocomplete="off" require_onced>
-                            </div>
-                            <div class="col-auto">
-                                <button id="sendButton" type="submit" class="btn btn-secondary mb-3">作成</button>
+                                <input id="serverInput" name="createServer" type="text" class="form-control" placeholder="サーバーを作成" autocomplete="off" require_onced>
                             </div>
                         </form>
                     <?php } ?>
                 </dev>
             </div>
 	    </main>
-        <script src="../assets/js/check.js"></script>
+        <script src="./assets/script/checkServer.js"></script>
+        <script src="./assets/script/checkMessage.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
