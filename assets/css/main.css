@@ -1,5 +1,6 @@
 .scrollMessage {
     width: 800px;
     height: 800px;
+    border: solid 1px;
     overflow: scroll;
 }
