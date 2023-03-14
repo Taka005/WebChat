@@ -84,12 +84,12 @@ if(!empty($server)){
                                 <h6><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
                                 <p><?= $message["text"] ?></p>
                             <?php } ?>
-                            <form id="messageForm" class="row g-3" action="./app?server=<?= $server["id"] ?>" method="post">
-                                <div class="col-auto">
-                                    <input id="messageInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off">
-                                </div>
-                            </form>
                         </div>
+                        <form id="messageForm" class="row g-3" action="./app?server=<?= $server["id"] ?>" method="post">
+                            <div class="col-auto">
+                                <input id="messageInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off">
+                            </div>
+                        </form>
                     <?php }else{ ?>
                         <ul class="list-group">
                             <?php 
