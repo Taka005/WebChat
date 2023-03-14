@@ -142,7 +142,7 @@ function createMessage($user,$server,$text){
 		"time" => time()
 	));
 
-	file_put_contents("./data/server/".$server."/message.json",$message,JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR);
+	file_put_contents("./data/server/".$server."/message.json",json_encode($message,JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
 
 	header("Location: ./app/".$server);
 }
