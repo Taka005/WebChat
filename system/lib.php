@@ -13,7 +13,7 @@ function createId($n){
     return $random;
 }
 
-function mb_wordwrap($string, $width=75, $break="\n", $cut = false){
+function mb_wordwrap($string, $width, $break, $cut){
     if(!$cut){
         $regexp = "#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){".$width.",}\b#U";
     }else{
