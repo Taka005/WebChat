@@ -61,7 +61,7 @@ if(!isset($_SESSION["user"])){
             </nav>
         </header>
 	    <main>
-            <div class="container">
+            <div class="app">
           
             </div>
 	    </main>
