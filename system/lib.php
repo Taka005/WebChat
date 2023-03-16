@@ -14,19 +14,12 @@ function createId($n){
 }
 
 function mb_wordwrap($str, $width, $break){
-	$w = mb_strwidth($str, "eucJP-win");
-	$arr = array();
-	if($w < $width){
-		return $str;
-	}
-	while($w > $width){
-		$trimStr = mb_strimwidth($str, 0, $width, "", "eucJP-win");
-		$arr[] = $trimStr;
-		$str = preg_replace("/^$trimStr/", "", $str);
-		$w = mb_strwidth($str, "eucJP-win");
-	}
-	$arr[] = $str;
-	return implode($break, $arr);
+    $c = mb_strlen($str);
+    $arr = [];
+    for($i=0; $i<=$c; $i+=$width){
+        $arr[] = mb_substr($str, $i, $width);
+    }
+    return implode($break, $arr);
 }
 
 //システム
