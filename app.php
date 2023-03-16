@@ -87,7 +87,7 @@ if(!empty($server)){
                     </form>
                     <?php foreach(array_reverse($messages) as $message){ ?>
                         <h6><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
-                        <p><?= $message["text"] ?></p>
+                        <p><?= wordwrap($message["text"],30,"<br/>") ?></p>
                     <?php } ?>
                 <?php }else{ ?>
                     <form id="serverForm" class="row g-3" action="./app" method="post">
