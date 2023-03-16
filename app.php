@@ -79,38 +79,34 @@ if(!empty($server)){
         </header>
 	    <main>
             <div class="container">
-                <div class="position-absolute top-50 start-50 translate-middle">
-                    <?php if(!empty($server)){ ?>
-                        <div class="scrollMessage">
-                            <?php foreach($messages as $message){ ?>
-                                <h6><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
-                                <p><?= $message["text"] ?></p>
-                            <?php } ?>
+                <?php if(!empty($server)){ ?>
+                    <form id="messageForm" class="row g-3" action="./app?server=<?= $server["id"] ?>" method="post">
+                        <div class="col-auto">
+                            <input id="messageInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off">
                         </div>
-                        <form id="messageForm" class="row g-3" action="./app?server=<?= $server["id"] ?>" method="post">
-                            <div class="col-auto">
-                                <input id="messageInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off">
-                            </div>
-                        </form>
-                    <?php }else{ ?>
-                        <ul class="list-group">
-                            <?php 
-                                foreach(getServers() as $server){ 
-                                    $server = getServer(basename($server));
-                            ?>  
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="./app?server=<?= $server["id"] ?>"><?= $server["name"] ?></a>
-                                    <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
-                                </li>
-                            <?php } ?>
-                        </ul>
-                        <form id="serverForm" class="row g-3" action="./app" method="post">
-                            <div class="col-auto">
-                                <input id="serverInput" name="createServer" type="text" class="form-control" placeholder="サーバーを作成" autocomplete="off">
-                            </div>
-                        </form>
+                    </form>
+                    <?php foreach(array_reverse($messages) as $message){ ?>
+                        <h6><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
+                        <p><?= $message["text"] ?></p>
                     <?php } ?>
-                </dev>
+                <?php }else{ ?>
+                    <form id="serverForm" class="row g-3" action="./app" method="post">
+                        <div class="col-auto">
+                            <input id="serverInput" name="createServer" type="text" class="form-control" placeholder="サーバーを作成" autocomplete="off">
+                        </div>
+                    </form>
+                    <ul class="list-group">
+                        <?php 
+                            foreach(getServers() as $server){ 
+                                $server = getServer(basename($server));
+                        ?>  
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="./app?server=<?= $server["id"] ?>"><?= $server["name"] ?></a>
+                                <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                <?php } ?>
             </div>
 	    </main>
         <script src="./assets/js/checkServer.js"></script>
