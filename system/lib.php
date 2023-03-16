@@ -13,24 +13,20 @@ function createId($n){
     return $random;
 }
 
-function mb_wordwrap($string, $width, $break, $cut){
-    if(!$cut){
-        $regexp = "#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){".$width.",}\b#U";
-    }else{
-        $regexp = "#^(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]+){".$width."}#";
-    }
-    $string_length = mb_strlen($string,"UTF-8");
-    $cut_length = ceil($string_length / $width);
-    $i = 1;
-    $return = "";
-    while ($i < $cut_length){
-        preg_match($regexp, $string, $matches);
-        $new_string = (!$matches ? $string : $matches[0]);
-        $return .= $new_string.$break;
-        $string = substr($string, strlen($new_string));
-        $i++;
-    }
-    return $return.$string;
+function mb_wordwrap($str, $width, $break){
+	$w = mb_strwidth($str, "eucJP-win");
+	$arr = array();
+	if($w < $width){
+		return $str;
+	}
+	while($w > $width){
+		$trimStr = mb_strimwidth($str, 0, $width, "", "eucJP-win");
+		$arr[] = $trimStr;
+		$str = preg_replace("/^$trimStr/", "", $str);
+		$w = mb_strwidth($str, "eucJP-win");
+	}
+	$arr[] = $str;
+	return implode($break, $arr);
 }
 
 //システム
