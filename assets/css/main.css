@@ -1,9 +1,9 @@
 .app {
-    width: 60%;
-    margin: 200px auto;
+    width: fit-content;
+    margin: 150px auto;
 }
 
-#messageForm {
+#messageForm, #serverForm {
     width: fit-content;
     margin: 0px auto 30px;
 }
