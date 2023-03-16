@@ -102,7 +102,7 @@ if(!empty($server)){
                         ?>  
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                             <a href="./app?server=<?= $server["id"] ?>"><?= $server["name"] ?></a>
-                                <span class="badge bg-primary rounded-pill"><?= count(getMessages($server["id"])) ?></span>
+                                <span class="badge bg-primary"><?= count(getMessages($server["id"])) ?></span>
                             </li>
                         <?php } ?>
                     </ul>
