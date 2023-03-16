@@ -78,7 +78,7 @@ if(!empty($server)){
             </nav>
         </header>
 	    <main>
-            <div class="container">
+            <div class="app">
                 <?php if(!empty($server)){ ?>
                     <form id="messageForm" class="row g-3" action="./app?server=<?= $server["id"] ?>" method="post">
                         <div class="col-auto">
