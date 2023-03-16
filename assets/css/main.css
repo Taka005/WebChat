@@ -2,3 +2,8 @@
     width: 60%;
     margin: 300px auto;
 }
+
+#messageForm {
+    width: fit-content;
+    margin: 0px auto 10px;
+}
