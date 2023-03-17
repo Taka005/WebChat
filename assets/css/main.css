@@ -45,3 +45,8 @@
     width: fit-content;
     margin: 0px 45px;
 }
+
+.invalidLink:link, .invalidLink:visited, .invalidLink:hover, .invalidLink:active {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
