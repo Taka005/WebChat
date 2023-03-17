@@ -28,7 +28,7 @@ if(!empty($server)){
 <html lang="ja">
     <head>
         <noscript>
-            <h1>このサイトを使用するにはJavaScriptを有効にする必要があります</h1>
+            <meta http-equiv="refresh" content="0;URL=error/noscript.html">
         </noscript>
     
         <meta charset="utf-8">
