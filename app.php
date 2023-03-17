@@ -87,15 +87,14 @@ if(!empty($server)){
                     </form>
                     <?php foreach(array_reverse($messages) as $message){ ?>
                         <div id="<?= $message["id"] ?>">
-                            <h6 class="messageUser"><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
-                            <div class="btn-group">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">...</button>
+                            <div id="manageMessage" class="btn-group">
+                                <a class="btn btn-outline-secondary btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#"></a></li>
-                                    <li><a class="dropdown-item" href="#"></a></li>
-                                    <li><a class="dropdown-item" href="#"></a></li>
+                                    <li><a class="dropdown-item">リンクをコピー</a></li>
+                                    <li><a class="dropdown-item">メッセージを削除</a></li>
                                 </ul>
                             </div>
+                            <h6 class="messageUser"><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i",$message["time"]) ?></h6>
                             <p class="messageText"><?= mb_wordwrap($message["text"],25,"<br/>",true) ?></p>
                         </div>
                     <?php } ?>

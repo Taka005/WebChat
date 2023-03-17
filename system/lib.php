@@ -48,7 +48,7 @@ function getUser($id){
  * @param Object $user ユーザーデータ
  */
 function createUser($user){
-	file_put_contents("./data/user/".$user["id"].".json",json_encode(array(
+	file_put_contents("../data/user/".$user["id"].".json",json_encode(array(
 		"id" => $user["id"],
 		"name" => $user["username"],
 		"discriminator" => $user["discriminator"],

@@ -20,3 +20,7 @@
     width: fit-content;
     margin: 150px auto;
 }
+
+#manageMessage {
+    float: right;
+}

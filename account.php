@@ -63,7 +63,7 @@ if(!isset($_SESSION["user"])){
 	    <main>
             <div class="account">
                 <div class="card">
-                    <img src="<?= $_SESSION["avatar"] ?>" class="card-img-top" alt="アカウント画像" width="300" height="300">
+                    <img src="<?= $_SESSION["avatar"] ?>" class="card-img-top" alt="アカウント画像" width="250" height="250">
                     <div class="card-body">
                         <h5 class="card-title"><?= $_SESSION["username"]."#".$_SESSION["discriminator"] ?></h5>
                         <p class="card-text"><?= $_SESSION["id"] ?></p>
