@@ -6,6 +6,4 @@
     $scopes = "identify";
 
     $redirect_url = "";
-
-    $admin = array();
 ?>
