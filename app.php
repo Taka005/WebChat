@@ -27,6 +27,10 @@ if(!empty($server)){
 <!DOCTYPE html>
 <html lang="ja">
     <head>
+        <noscript>
+            <h1>このサイトを使用するにはJavaScriptを有効にする必要があります</h1>
+        </noscript>
+    
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
