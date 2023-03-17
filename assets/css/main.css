@@ -15,3 +15,8 @@
 .messageText {
     margin: 0px 15px 20px;
 }
+
+.account {
+    width: fit-content;
+    margin: 150px auto;
+}

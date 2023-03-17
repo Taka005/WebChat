@@ -86,8 +86,10 @@ if(!empty($server)){
                         </div>
                     </form>
                     <?php foreach(array_reverse($messages) as $message){ ?>
-                        <h6 class="messageUser"><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
-                        <p class="messageText"><?= mb_wordwrap($message["text"],25,"<br/>",true) ?></p>
+                        <div id="<?= $message["id"] ?>">
+                            <h6 class="messageUser"><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
+                            <p class="messageText"><?= mb_wordwrap($message["text"],25,"<br/>",true) ?></p>
+                        </div>
                     <?php } ?>
                 <?php }else{ ?>
                     <form id="serverForm" class="row g-3" action="./app" method="post">

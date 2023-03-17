@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__."/../config.php";
+
 function is_animated($image){
 	$ext = substr($image, 0, 2);
 	if($ext == "a_"){
@@ -51,7 +53,6 @@ function createUser($user){
 		"name" => $user["username"],
 		"discriminator" => $user["discriminator"],
 		"avatar" => "https://cdn.discordapp.com/avatars/".$user["id"]."/".$user["avatar"].is_animated($user["avatar"])."?size=1024",
-		"color" => $user["accent_color"],
 		"time" => time()
 	),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR));
 }
@@ -103,11 +104,11 @@ function createServer($user,$name){
 function deleteServer($user,$id){
 	$setting = json_decode(file_get_contents("./data/server/".$id."/setting.json"),true);
 
-	if($setting["owner"] == $user){
+	if($setting["owner"] == $user||in_array($admin,$user)){
 		unlink("./data/server/".$id."/setting.json");
 		unlink("./data/server/".$id."/message.json");
 
-		return rmdir("./data?server=".$id);
+		return rmdir("./data/server/".$id);
 	}else{
 		return false;
 	}
@@ -166,7 +167,7 @@ function deleteMessage($user,$server,$id){
 	$messages = json_decode(file_get_contents("./data/server/".$server."/message.json"),true);
 	$message = array_search($id,array_column(json_decode(file_get_contents("./data/server/".$server."/message.json"),true),"id"));
 
-	if($message["user"] == $user){
+	if($message["user"] == $user||in_array($admin,$user)){
 		return array_splice($messages,$message);
 	}else{
 		return false;
