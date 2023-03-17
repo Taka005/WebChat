@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."/system/discord.php";
+require_once __DIR__."/system/oauth.php";
 require_once __DIR__."/system/lib.php";
 require_once __DIR__."/config.php";
 
