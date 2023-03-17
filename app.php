@@ -88,6 +88,14 @@ if(!empty($server)){
                     <?php foreach(array_reverse($messages) as $message){ ?>
                         <div id="<?= $message["id"] ?>">
                             <h6 class="messageUser"><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i:s",$message["time"]) ?></h6>
+                            <div class="btn-group">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">...</button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#"></a></li>
+                                    <li><a class="dropdown-item" href="#"></a></li>
+                                    <li><a class="dropdown-item" href="#"></a></li>
+                                </ul>
+                            </div>
                             <p class="messageText"><?= mb_wordwrap($message["text"],25,"<br/>",true) ?></p>
                         </div>
                     <?php } ?>
