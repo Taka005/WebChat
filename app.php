@@ -20,7 +20,7 @@ if(!empty($server)){
         if(isset($_POST["createMessage"])){
             createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["createMessage"]));
         }else if(isset($_DELETE["deleteMessage"])){
-            deleteMessage($_SESSION["id"],$server["id"],htmlspecialchars($_DELETE["deleteMessage"]))
+            deleteMessage($_SESSION["id"],$server["id"],htmlspecialchars($_DELETE["deleteMessage"]));
         }
         $messages = getMessages($server["id"]);
     }
