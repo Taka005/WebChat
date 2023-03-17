@@ -9,7 +9,7 @@ function is_animated($image){
 }
 
 function createId($n){
-    $random = substr(str_shuffle("01234567890123456789"),0,$n);
+    $random = substr(str_shuffle("012345678901234567890123456789"),0,$n);
     return $random;
 }
 
@@ -88,7 +88,7 @@ function createServer($user,$name){
 		"name" => $name,
 		"owner" => $user,
         "time" => time()
-	),JSON_UNESCAPED_SLASHES|JSON_PARTIAL_OUTPUT_ON_ERROR));
+	),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR));
 	
 	file_put_contents("./data/server/".$id."/message.json",json_encode(array(),JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR));
 
