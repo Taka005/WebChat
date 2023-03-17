@@ -96,6 +96,11 @@ if(!empty($server)){
                                 <a class="btn btn-outline-secondary btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" onclick="linkCopy('<?= $server['id'] ?>','<?= $message['id'] ?>')">リンクをコピー</a></li>
+                                    <li>
+                                        <form  action="./app?server=<?= $server["id"] ?>" method="delete">
+                                            <a class="dropdown-item btn btn-danger btn-sm" role="button">メッセージを削除</a>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                             <h6 class="messageUser"><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i",$message["time"]) ?></h6>
