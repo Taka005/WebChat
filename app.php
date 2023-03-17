@@ -80,6 +80,7 @@ if(!empty($server)){
 	    <main>
             <div class="app">
                 <?php if(!empty($server)){ ?>
+                    <h1 class="serverTitle"><?= $server["name"] ?></h1>
                     <form id="messageForm" class="row g-3" action="./app?server=<?= $server["id"] ?>" method="post">
                         <div class="col-auto">
                             <input id="messageInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off">
@@ -90,12 +91,12 @@ if(!empty($server)){
                             <div id="manageMessage" class="btn-group">
                                 <a class="btn btn-outline-secondary btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item">リンクをコピー</a></li>
+                                    <li><a class="dropdown-item" onclick="linkCopy('<?= $server['id'] ?>','<?= $message['id'] ?>')">リンクをコピー</a></li>
                                     <li><a class="dropdown-item">メッセージを削除</a></li>
                                 </ul>
                             </div>
-                            <h6 class="messageUser"><?= getUser($message["user"])["name"]."(".$message["user"].")" ?>・<?= date("Y/m/d H:i",$message["time"]) ?></h6>
-                            <p class="messageText"><?= mb_wordwrap($message["text"],25,"<br/>",true) ?></p>
+                            <h6 class="messageUser"><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i",$message["time"]) ?></h6>
+                            <p class="messageText"><?= mb_wordwrap($message["text"],20,"<br/>",true) ?></p>
                         </div>
                     <?php } ?>
                 <?php }else{ ?>
@@ -120,6 +121,7 @@ if(!empty($server)){
 	    </main>
         <script src="./assets/js/checkServer.js"></script>
         <script src="./assets/js/checkMessage.js"></script>
+        <script src="./assets/js/linkCopy.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>

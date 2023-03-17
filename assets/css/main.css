@@ -1,11 +1,6 @@
 .app {
     width: fit-content;
-    margin: 150px auto;
-}
-
-#messageForm, #serverForm {
-    width: fit-content;
-    margin: 0px auto 30px;
+    margin: 80px auto;
 }
 
 .messageUser {
@@ -21,6 +16,16 @@
     margin: 150px auto;
 }
 
+.serverTitle {
+    width: fit-content;
+    margin: 10px auto 30px;
+}
+
 #manageMessage {
     float: right;
+}
+
+#messageForm, #serverForm {
+    width: fit-content;
+    margin: 0px auto 30px;
 }
