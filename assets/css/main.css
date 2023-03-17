@@ -14,11 +14,11 @@
 }
 
 .message {
-    margin: 0px 0px 20px;
+    margin-bottom: 20px;
 }
 
 .messageUser {
-    margin: 3px 0px;
+    margin-bottom: 3px;
 }
 
 .messageText {
