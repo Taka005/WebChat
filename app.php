@@ -92,11 +92,10 @@ if(!empty($server)){
                                 <a class="btn btn-outline-secondary btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" onclick="linkCopy('<?= $server['id'] ?>','<?= $message['id'] ?>')">リンクをコピー</a></li>
-                                    <li><a class="dropdown-item">メッセージを削除</a></li>
                                 </ul>
                             </div>
                             <h6 class="messageUser"><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i",$message["time"]) ?></h6>
-                            <p class="messageText"><?= mb_wordwrap($message["text"],20,"<br/>",true) ?></p>
+                            <p class="messageText"><?= mb_wordwrap($message["text"],12,"<br/>",true) ?></p>
                         </div>
                     <?php } ?>
                 <?php }else{ ?>
