@@ -3,7 +3,7 @@ require_once __DIR__."/system/oauth.php";
 require_once __DIR__."/config.php";
 
 if(!isset($_SESSION["user"])){
-    header("Location: ".url($client_id,$redirect_url,$scopes));
+    return header("Location: ".url($client_id,$redirect_url,$scopes));
 }
 
 ?>

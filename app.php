@@ -6,9 +6,9 @@ require_once __DIR__."/config.php";
 date_default_timezone_set("Asia/Tokyo");
 
 if(!isset($_SESSION["user"])){
-    header("Location: ".url($client_id,$redirect_url,$scopes));
+    return header("Location: ".url($client_id,$redirect_url,$scopes));
 }else if(!getUser($_SESSION["id"])){
-    header("Location: ".url($client_id,$redirect_url,$scopes));
+    return header("Location: ".url($client_id,$redirect_url,$scopes));
 }
 
 if(isset($_POST["createServer"])){
