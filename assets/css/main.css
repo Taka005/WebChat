@@ -13,10 +13,10 @@
 
 .account {
     width: fit-content;
-    margin: 150px auto;
+    margin: 80px auto;
 }
 
-.serverTitle {
+.title {
     width: fit-content;
     margin: 10px auto 30px;
 }

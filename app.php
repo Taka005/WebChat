@@ -80,7 +80,7 @@ if(!empty($server)){
 	    <main>
             <div class="app">
                 <?php if(!empty($server)){ ?>
-                    <h1 class="serverTitle"><?= $server["name"] ?></h1>
+                    <h1 class="title"><?= $server["name"] ?></h1>
                     <form id="messageForm" class="row g-3" action="./app?server=<?= $server["id"] ?>" method="post">
                         <div class="col-auto">
                             <input id="messageInput" name="createMessage" type="text" class="form-control" placeholder="メッセージを送信" autocomplete="off">
@@ -100,6 +100,7 @@ if(!empty($server)){
                         </div>
                     <?php } ?>
                 <?php }else{ ?>
+                    <h1 class="title">サーバー一覧</h1>
                     <form id="serverForm" class="row g-3" action="./app" method="post">
                         <div class="col-auto">
                             <input id="serverInput" name="createServer" type="text" class="form-control" placeholder="サーバーを作成" autocomplete="off">
@@ -112,7 +113,7 @@ if(!empty($server)){
                         ?>  
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                             <a href="./app?server=<?= $server["id"] ?>"><?= $server["name"] ?></a>
-                                <span class="badge bg-primary"><?= count(getMessages($server["id"])) ?></span>
+                                <span class="badge bg-secondary"><?= count(getMessages($server["id"])) ?></span>
                             </li>
                         <?php } ?>
                     </ul>

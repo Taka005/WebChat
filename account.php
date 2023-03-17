@@ -62,6 +62,7 @@ if(!isset($_SESSION["user"])){
         </header>
 	    <main>
             <div class="account">
+                <h1 class="title">アカウント</h1>
                 <div class="card">
                     <img src="<?= $_SESSION["avatar"] ?>" class="card-img-top" alt="アカウント画像" width="250" height="250">
                     <div class="card-body">
