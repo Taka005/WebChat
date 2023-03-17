@@ -60,10 +60,9 @@
             </nav>
         </header>
 	    <main>
-            <div class="container">
-                <div class="position-absolute top-50 start-50 translate-middle">
-                    <a class="btn btn-primary btn-lg" href="./app" role="button">会話を始める</a>
-                </dev>
+            <div class="home">
+                <h1 class="homeTitle">WebChat</h1>
+                <a id="startButton" class="btn btn-primary btn-lg" href="./app" role="button">会話を始める</a>
             </div>
 	    </main>
         <script src="./assets/js/index.js"></script>
