@@ -7,6 +7,8 @@ date_default_timezone_set("Asia/Tokyo");
 
 if(!isset($_SESSION["user"])){
     header("Location: ".url($client_id,$redirect_url,$scopes));
+}else if(!getUser($_SESSION["id"])){
+    header("Location: ".url($client_id,$redirect_url,$scopes));
 }
 
 if(isset($_POST["createServer"])){
@@ -19,8 +21,6 @@ if(!empty($server)){
     if($server){
         if(isset($_POST["createMessage"])){
             createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["createMessage"]));
-        }else if(isset($_DELETE["deleteMessage"])){
-            deleteMessage($_SESSION["id"],$server["id"],htmlspecialchars($_DELETE["deleteMessage"]));
         }
         $messages = getMessages($server["id"]);
     }
@@ -94,19 +94,8 @@ if(!empty($server)){
                     </form>
                     <?php foreach(array_reverse($messages) as $message){ ?>
                         <div id="<?= $message["id"] ?>">
-                            <div id="manageMessage" class="btn-group">
-                                <a class="btn btn-outline-secondary btn-sm dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" onclick="linkCopy('<?= $server['id'] ?>','<?= $message['id'] ?>')">リンクをコピー</a></li>
-                                    <li>
-                                        <form action="./app?server=<?= $server["id"] ?>" method="delete">
-                                            <a value="<?= $message["id"] ?>" name="deleteMessage" class="dropdown-item btn btn-danger btn-sm" role="button">メッセージを削除</a>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
                             <h6 class="messageUser"><?= getUser($message["user"])["name"] ?>・<?= date("Y/m/d H:i",$message["time"]) ?></h6>
-                            <p class="messageText"><?= mb_wordwrap($message["text"],12,"<br/>",true) ?></p>
+                            <p class="messageText"><?= mb_wordwrap($message["text"],25,"<br/>",true) ?></p>
                         </div>
                     <?php } ?>
                 <?php }else{ ?>
@@ -132,7 +121,6 @@ if(!empty($server)){
 	    </main>
         <script src="./assets/js/checkServer.js"></script>
         <script src="./assets/js/checkMessage.js"></script>
-        <script src="./assets/js/linkCopy.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>

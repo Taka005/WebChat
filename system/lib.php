@@ -96,24 +96,6 @@ function createServer($user,$name){
 	header("Location: ./app?server=".$id);
 }
 
-/**
- * @param String $user ユーザーID
- * @param String $id サーバーID
- * @return Boolean 成功か失敗か
- */
-function deleteServer($user,$id){
-	$setting = json_decode(file_get_contents("./data/server/".$id."/setting.json"),true);
-
-	if($setting["owner"] == $user||in_array($admin,$user)){
-		unlink("./data/server/".$id."/setting.json");
-		unlink("./data/server/".$id."/message.json");
-
-		return rmdir("./data/server/".$id);
-	}else{
-		return false;
-	}
-}
-
 //メッセージ
 
 /**
@@ -155,22 +137,5 @@ function createMessage($user,$server,$text){
 	file_put_contents("./data/server/".$server."/message.json",json_encode($message,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR));
 
 	header("Location: ./app?server=".$server);
-}
-
-/**
- * @param String $user ユーザーID
- * @param String $server サーバーID
- * @param String $id メッセージID
- * @return Boolean 成功か失敗か
- */
-function deleteMessage($user,$server,$id){
-	$messages = json_decode(file_get_contents("./data/server/".$server."/message.json"),true);
-	$message = array_search($id,array_column(json_decode(file_get_contents("./data/server/".$server."/message.json"),true),"id"));
-
-	if($message["user"] == $user||in_array($admin,$user)){
-		return array_splice($messages,$message);
-	}else{
-		return false;
-	}
 }
 ?>
