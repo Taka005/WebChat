@@ -19,6 +19,8 @@ if(!empty($server)){
     if($server){
         if(isset($_POST["createMessage"])){
             createMessage($_SESSION["id"],$server["id"],htmlspecialchars($_POST["createMessage"]));
+        }else if(isset($_DELETE["deleteMessage"])){
+            deleteMessage($_SESSION["id"],$server["id"],htmlspecialchars($_DELETE["deleteMessage"]))
         }
         $messages = getMessages($server["id"]);
     }
@@ -97,8 +99,8 @@ if(!empty($server)){
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" onclick="linkCopy('<?= $server['id'] ?>','<?= $message['id'] ?>')">リンクをコピー</a></li>
                                     <li>
-                                        <form  action="./app?server=<?= $server["id"] ?>" method="delete">
-                                            <a class="dropdown-item btn btn-danger btn-sm" role="button">メッセージを削除</a>
+                                        <form action="./app?server=<?= $server["id"] ?>" method="delete">
+                                            <a value="<?= $message["id"] ?>" name="deleteMessage" class="dropdown-item btn btn-danger btn-sm" role="button">メッセージを削除</a>
                                         </form>
                                     </li>
                                 </ul>
