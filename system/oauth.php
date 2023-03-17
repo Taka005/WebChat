@@ -40,7 +40,7 @@ function get_user(){
     $res = json_decode(curl_exec($curl),true);
     curl_close($curl);
 
-    if(!empty($res)){
+    if(!empty($res["id"])){
         $_SESSION["user"] = $res;
         $_SESSION["username"] = $res["username"];
         $_SESSION["discriminator"] = $res["discriminator"];
